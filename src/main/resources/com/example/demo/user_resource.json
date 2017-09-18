@@ -1,0 +1,8 @@
+{
+  "id": "123",
+  "first_name": "eisen",
+  "last_name": "xu",
+  "links": {
+    "self": "http://localhost/users/123"
+  }
+}
