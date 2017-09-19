@@ -12,27 +12,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @JsonTest
-public class UserTest {
-
+public class WrapJsonTest {
     @Autowired
-    private JacksonTester<User> json;
-    private User user;
+    private JacksonTester<WrapJson> json;
+    private WrapJson name;
 
     @Before
     public void setUp() throws Exception {
-        user = new User("123", "eisen", "xu");
+        name = new WrapJson("name");
     }
 
     @Test
-    public void should_serialize_json_property() throws Exception {
-        assertThat(this.json.write(user)).isStrictlyEqualToJson("user.json");
-    }
-
-    @Test
-    public void should_remove_empty_property() throws Exception {
-
-        User user = new User("123", "", "xu");
-        System.out.println(this.json.write(user));
-        assertThat(this.json.write(user)).isStrictlyEqualToJson("user_with_empty.json");
+    public void test() throws Exception {
+        String content = "{\n" +
+            "  \"wrap\": {\n" +
+            "    \"name\": \"name\"\n" +
+            "  }\n" +
+            "}\n";
+        assertThat(json.parseObject(content)).isEqualTo(name);
     }
 }
